@@ -7,27 +7,46 @@ keyboard = Keyboard()
 ___ = TRANSPARENT
 BOOT = BOOTLOADER
 L1 = LAYER_TAP(1)
-L2D = LAYER_TAP(2, D)
-L3B = LAYER_TAP(3, B)
+
+# QWERTY
+# L2D = LAYER_TAP(2, D)
+# L3B = LAYER_TAP(3, B)
+# Dvorak
+L2E = LAYER_TAP(2, E)
+L3X = LAYER_TAP(3, X)
+
 LSFT4 = LAYER_MODS(4, MODS(LSHIFT))
 RSFT4 = LAYER_MODS(4, MODS(RSHIFT))
 L5S = LAYER_TAP(5, S)
 
-# Semicolon & Ctrl
+# Semicolon Ctrl for QWERTY
 SCC = MODS_TAP(MODS(RCTRL), ';')
+# S Ctrl for Dvorak
+# SCC = MODS_TAP(MODS(RCTRL), S)
+
+# H Ctrl for Dvorak
+HCTRL = MODS_TAP(MODS(RCTRL), H)
+
+# SPACE Ctrl
+SPACECTRL = MODS_TAP(MODS(RCTRL), SPACE)
+
 SINS = MODS_KEY(MODS(SHIFT), INSERT)
 
 keyboard.keymap = (
+    # Dvorak
     # layer 0
+    # 'H' 'SPACE' Ctrl # # exchange ';' and '"', U and I #
     (
-        ESC,   1,   2,   3,   4,   5,   6,   7,   8,   9,   0, '-', '=', BACKSPACE,
-        TAB,   Q,   W,   E,   R,   T,   Y,   U,   I,   O,   P, '[', ']', '|',
-        CAPS,  A,   S, L2D,   F,   G,   H,   J,   K,   L, SCC, '"',    ENTER,
-        LSFT4, Z,   X,   C,   V, L3B,   N,   M, ',', '.', '/',         RSFT4,
-        LCTRL, LGUI, LALT,          SPACE,            RALT, MENU,  L1, RCTRL
+        ESC,   1,   2,   3,   4,   5,   6,   7,   8,   9,   0, '[', ']', BACKSPACE,
+        TAB, ';', ',', '.',   P,   Y,   F,   G,   C,   R,   L, '/', '=', '|',
+        CAPS,  A,   O, L2E,   I,   U,   D,HCTRL,  T,   N,   S, '-',    ENTER,
+        #LSFT4,'"',  Q,   J,   K, L3X,   B,   M,   W,   V,   Z,         RSFT4,
+        LSFT4,'"',  Q,   J,   K, L3X,   B,   M,   W,   V,   Z, MODS_TAP(MODS(RSHIFT), UP),
+        #LCTRL, LGUI, LALT,      SPACECTRL,            RALT, MENU,  L1, RCTRL
+        LCTRL, LGUI, LALT, SPACECTRL, RALT, MODS_TAP(MODS(RGUI), LEFT), LAYER_TAP(1, DOWN), MODS_TAP(MODS(RCTRL), RIGHT)
     ),
 
-    # layer 1
+    # layer 1 Fn layer
     (
         '`',  F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9, F10, F11, F12, DEL,
         ___, ___,  UP, ___, ___, ___, ___, ___, ___, ___,SUSPEND,___,___,___,
@@ -36,16 +55,16 @@ keyboard.keymap = (
         ___, ___, ___,                ___,               ___, ___, ___,  ___
     ),
 
-    # layer 2
+    # layer 2 E Nav Layer
     (
         '`',  F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9, F10, F11, F12, DEL,
-        ___, ___, ___, ___, ___, ___,HOME,PGUP, ___, ___,SINS,AUDIO_VOL_DOWN,AUDIO_VOL_UP,AUDIO_MUTE,
+        ___, ___, ___, ___, ___, ___,___,PGUP, HOME, END,SINS,AUDIO_VOL_DOWN,AUDIO_VOL_UP,AUDIO_MUTE,
         ___, ___, ___, ___, ___, ___,LEFT,DOWN, UP,RIGHT, ___, ___,      ___,
-        ___, ___, ___, ___, ___, ___,PGDN,END, ___, ___, ___,           ___,
+        ___, ___, ___, ___, ___, ___,PGDN,___, ___, ___, ___,           ___,
         ___, ___, ___,                ___,               ___, ___, ___,  ___
     ),
 
-    # layer 3
+    # layer 3 X hardware function
     (
         BT_TOGGLE,BT1,BT2, BT3,BT4,BT5,BT6,BT7, BT8, BT9, BT0, ___, ___, ___,
         RGB_MOD, ___, ___, ___, ___, ___,___,USB_TOGGLE,___,___,___,___,___, ___,
@@ -54,13 +73,17 @@ keyboard.keymap = (
         ___, ___, ___,                ___,               ___, ___, ___,  ___
     ),
 
-    # layer 4
+    # layer 4 modify 'SHIFT' layer, means: SHIFT + these keys
+    # TODO: How to realize SHIFT + BACKSPACE = DEL?
+    # Why E/X/H need to write again in this layer? bcz if no, long press will triger L2E L3X, not the Shift+E/X/H we want
+    # Caps->ESC to realize Ctrl+Shift+Esc
+
     (
         '`', ___, ___, ___, ___, ___, ___, ___, ___, ___, ___, ___, ___, ___,
         ___, ___, ___, ___, ___, ___, ___, ___, ___, ___, ___, ___, ___, ___,
-        ___, ___, ___,   D, ___, ___, ___, ___, ___, ___, ';', ___,      ___,
-        ___, ___, ___, ___, ___,   B, ___, ___, ___, ___, ___,           ___,
-        ___, ___, ___,                ___,               ___, ___, ___,  ___
+        ESC, ___, ___,   E, ___, ___, ___,   H, ___, ___, ___, ___,      ___,
+        ___, ___, ___, ___, ___,   X, ___, ___, ___, ___, ___,           ___,
+        ___, ___, ___,              SPACE,                ___, ___, ___, ___
     ),
 
     # layer 5
@@ -79,6 +102,7 @@ keyboard.keymap = (
 keyboard.profiles = {
     # For example, BT8 is connected to a Mac
     "BT8": (
+        # QWERTY
         # layer 0
         (
             ESC,   1,   2,   3,   4,   5,   6,   7,   8,   9,   0, '-', '=', BACKSPACE,
@@ -99,12 +123,14 @@ keyboard.profiles = {
     )
 }
 
+# send text when a MACRO key is press down or release, n means the number MACRO(n)
 def macro_handler(dev, n, is_down):
     if is_down:
         dev.send_text('You pressed macro #{}\n'.format(n))
     else:
         dev.send_text('You released macro #{}\n'.format(n))
 
+# send text when two keys (named pair keys) are press down simultaneously, n means the order
 def pairs_handler(dev, n):
     dev.send_text('You just triggered pair keys #{}\n'.format(n))
 
@@ -112,6 +138,7 @@ def pairs_handler(dev, n):
 keyboard.macro_handler = macro_handler
 keyboard.pairs_handler = pairs_handler
 
+# the numbers below is not related with QWERTY layout, just means location
 # ESC(0)    1(1)   2(2)   3(3)   4(4)   5(5)   6(6)   7(7)   8(8)   9(9)   0(10)  -(11)  =(12)  BACKSPACE(13)
 # TAB(27)   Q(26)  W(25)  E(24)  R(23)  T(22)  Y(21)  U(20)  I(19)  O(18)  P(17)  [(16)  ](15)   \(14)
 # CAPS(28)  A(29)  S(30)  D(31)  F(32)  G(33)  H(34)  J(35)  K(36)  L(37)  ;(38)  "(39)      ENTER(40)
