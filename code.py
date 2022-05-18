@@ -146,7 +146,7 @@ keyboard.pairs_handler = pairs_handler
 # LCTRL(53)  LGUI(54)  LALT(55)               SPACE(56)          RALT(57)  MENU(58)  Fn(59)  RCTRL(60)
 
 # Pairs: J & K, U & I
-keyboard.pairs = [{35, 36}, {20, 19}]
+# keyboard.pairs = [{35, 36}, {20, 19}]
 
 # keyboard.verbose = False
 
