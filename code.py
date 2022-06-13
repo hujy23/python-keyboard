@@ -17,7 +17,7 @@ L3X = LAYER_TAP(3, X)
 
 LSFT4 = LAYER_MODS(4, MODS(LSHIFT))
 RSFT4 = LAYER_MODS(4, MODS(RSHIFT))
-L5S = LAYER_TAP(5, S)
+L5O = LAYER_TAP(5, O)
 
 # Semicolon Ctrl for QWERTY
 SCC = MODS_TAP(MODS(RCTRL), ';')
@@ -39,7 +39,7 @@ keyboard.keymap = (
     (
         ESC,   1,   2,   3,   4,   5,   6,   7,   8,   9,   0, '[', ']', BACKSPACE,
         TAB, ';', ',', '.',   P,   Y,   F,   G,   C,   R,   L, '/', '=', '|',
-        CAPS,  A,   O, L2E,   I,   U,   D,HCTRL,  T,   N,   S, '-',    ENTER,
+        CAPS,  A, L5O, L2E,   I,   U,   D,HCTRL,  T,   N,   S, '-',    ENTER,
         #LSFT4,'"',  Q,   J,   K, L3X,   B,   M,   W,   V,   Z,         RSFT4,
         LSFT4,'"',  Q,   J,   K, L3X,   B,   M,   W,   V,   Z, MODS_TAP(MODS(RSHIFT), UP),
         #LCTRL, LGUI, LALT,      SPACECTRL,            RALT, MENU,  L1, RCTRL
@@ -89,9 +89,9 @@ keyboard.keymap = (
     # layer 5
     (
         ___, ___, ___, ___, ___, ___, ___, ___, ___, ___, ___, ___, ___, ___,
-        ___, ___, ___, ___, ___, ___,MS_W_UP,MS_UL,MS_UP,MS_UR, ___, ___, ___, ___,
-        ___, ___, ___, ___, ___, ___,MS_BTN1,MS_LT,MS_DN,MS_RT,MS_BTN2, ___,      ___,
-        ___, ___, ___, ___, ___, ___,MS_W_DN,MS_DL,MS_DN,MS_DR, ___,           ___,
+        ___, ___, ___, ___, ___, ___,MS_W_UP, MS_UL,MS_UP,  MS_UR, MS_BTN4, ___, ___, ___,
+        ___, ___, ___, ___, ___, ___,MS_BTN1, MS_LT,MS_BTN3,MS_RT, MS_BTN2, ___,      ___,
+        ___, ___, ___, ___, ___, ___,MS_W_DN, MS_DL,MS_DN,  MS_DR, MS_BTN5,           ___,
         ___, ___, ___,                ___,               ___, ___, ___,  ___
     ),
 )
